@@ -1,0 +1,4 @@
+baseURL = "beamalsky.fyi/"
+languageCode = "en-us"
+title = "beamalsky.fyi"
+theme = "cocoa"
