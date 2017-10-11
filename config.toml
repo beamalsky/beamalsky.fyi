@@ -1,31 +1,4 @@
-# Site settings
-baseurl = "http://beamalsky.fyi/"
+baseURL = "beamalsky.fyi/"
 languageCode = "en-us"
 title = "beamalsky.fyi"
-theme = "hugrid"
-# Enter your tracking code to enable Google Analytics
-googleAnalytics = "UA-XXXXXXXX-Y"
-
-contentdir = "content"
-datadir = "data"
-layoutdir = "layouts"
-publishdir = "public"
-
-[params]
-    # Meta
-    title = "Bea Malsky"
-    subtitle = "print media, game design, net art, procedural rhetoric"
-    author = "Pavel Kanyshev"
-    description = "beamalsky.fyi"
-
-    # Body background color
-    bodybgcolor = "#f9f9f9"
-
-    # Preview container button text
-    buttontext = "Get the theme"
-
-    # Footer text
-    footertext = "Made by [Codrops](http://tympanus.net/codrops/2013/03/19/thumbnail-grid-with-expanding-preview/), [Hugo](http://gohugo.io) and [me](https://github.com/aerohub)"
-
-    # add extra-css
-    # custom_css = ['css/extra1.css', 'css/extra2.css']
+theme = "cocoa"
