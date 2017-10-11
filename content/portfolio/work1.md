@@ -8,7 +8,7 @@ weight = 0
 +++
 
 A website, voter registration drive, and exercise in political imagination. 
-[Link →](chanoformayor.com)
+[→](chanoformayor.com)
 <!--more-->
 
 Developed with Jean Cochrane, Kalil Smith-Nuevelle, and Alex Soble. 

@@ -1,4 +1,4 @@
-baseurl = "http://beamalsky.fyi/"
+baseurl = "https://beamalsky.fyi/"
 title = "beamalsky.fyi"
 theme = "hugo-creative-portfolio-theme"
 languageCode = "en-us"
@@ -10,7 +10,7 @@ googleAnalytics = ""
 [params]
   # Style options: default (pink), blue, green, pink, red, sea, violet
   # Use custom.css for your custom styling
-  style = "default"
+  style = "pink"
   description = "beamalsky.fyi"
  copyright = "&copy;2017 Bea Malsky"
   sidebarAbout = [
