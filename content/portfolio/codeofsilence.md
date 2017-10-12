@@ -4,7 +4,7 @@ draft = false
 image = "img/portfolio/codeofsilence.png"
 date = "2017-10-11"
 title = "Code of Silence"
-weight = 0
+weight = 6
 +++
 
 How the Chicago Police Department Covered Up for a Gang of Criminal Cops

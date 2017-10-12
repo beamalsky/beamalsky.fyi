@@ -4,7 +4,7 @@ draft = false
 image = "img/portfolio/chano4mayor_square.png"
 date = "2017-10-11"
 title = "#chano4mayor"
-weight = 0
+weight = 2
 +++
 
 A website, voter registration drive, and exercise in political imagination 
