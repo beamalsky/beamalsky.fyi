@@ -7,6 +7,8 @@ title = "Build Coffee"
 weight = 0
 +++
 
-A coffee shop and bookstore in the Experimental Station on the South Side of Chicago.
-[→](buildcoffee.org)
+A coffee shop and bookstore in the Experimental Station on the South Side of Chicago
+
 <!--more-->
+
+[→](http://buildcoffee.org)

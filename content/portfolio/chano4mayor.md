@@ -1,14 +1,14 @@
 +++
-showonlyimage = false
+showonlyimage = true
 draft = false
-image = "img/portfolio/chano4mayor.png"
+image = "img/portfolio/chano4mayor_square.png"
 date = "2017-10-11"
 title = "#chano4mayor"
 weight = 0
 +++
 
-A website, voter registration drive, and exercise in political imagination. 
-[→](chanoformayor.com)
+A website, voter registration drive, and exercise in political imagination 
+[→](http://chanoformayor.com)
 <!--more-->
 
 Developed with Jean Cochrane, Kalil Smith-Nuevelle, and Alex Soble. 
