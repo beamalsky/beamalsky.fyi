@@ -1,7 +1,7 @@
 +++
 showonlyimage = true
 draft = false
-image = "img/portfolio/codeofsilence.png"
+image = "img/portfolio/codeofsilence.jpg"
 date = "2017-10-11"
 title = "Code of Silence"
 weight = 6

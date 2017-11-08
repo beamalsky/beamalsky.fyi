@@ -1,7 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/ifitbleedsitleads.png"
+image = "img/portfolio/ifitbleedsitleads.jpg"
 date = "2017-10-11"
 title = "If It Bleeds It Leads"
 weight = 3

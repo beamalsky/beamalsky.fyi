@@ -1,7 +1,7 @@
 +++
 showonlyimage = true
 draft = false
-image = "img/portfolio/infectioncity.png"
+image = "img/portfolio/infectioncity.jpg"
 date = "2017-10-11"
 title = "Infection City"
 weight = 5

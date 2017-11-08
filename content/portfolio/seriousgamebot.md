@@ -1,7 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/seriousgamebot.png"
+image = "img/portfolio/seriousgamebot.jpg"
 date = "2017-10-11"
 title = "Serious Game Bot"
 weight = 0

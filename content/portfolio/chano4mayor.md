@@ -1,7 +1,7 @@
 +++
 showonlyimage = true
 draft = false
-image = "img/portfolio/chano4mayor_square.png"
+image = "img/portfolio/chano4mayor_square.jpg"
 date = "2017-10-11"
 title = "#chano4mayor"
 weight = 2

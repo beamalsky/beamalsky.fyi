@@ -1,7 +1,7 @@
 +++
 showonlyimage = true
 draft = false
-image = "img/portfolio/travis.png"
+image = "img/portfolio/travis.jpg"
 date = "2017-10-11"
 title = "Noise Before Music"
 weight = 7
