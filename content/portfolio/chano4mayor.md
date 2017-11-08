@@ -11,7 +11,9 @@ A website, voter registration drive, and exercise in political imagination
 
 <!--more-->
 
-![An @everylava lavalamp](/img/portfolio/chano4mayor.jpg)
+***
+
+![A drawing of Chance with a 2019 hat](/img/portfolio/chano4mayor.jpg)
 
 I developed #chano4mayor with Jean Cochrane, Kalil Smith-Nuevelle, and Alex Soble. 
 

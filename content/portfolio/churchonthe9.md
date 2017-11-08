@@ -11,4 +11,8 @@ Written as part of a 2016 Summer City Bureau Reporting Fellowship on economic de
 
 <!--more-->
 
+***
+
+![A drawing of Chance with a 2019 hat](/img/portfolio/churchonthe9.jpg)
+
 [Link](http://www.chicagomag.com/city-life/August-2016/Chatham-Church-on-the-9/)

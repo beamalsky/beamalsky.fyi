@@ -11,4 +11,6 @@ A month of queer zines at the University of Chicago Center for the Study of Gend
 
 <!--more-->
 
+***
+
 [→](http://buildcoffee.org)

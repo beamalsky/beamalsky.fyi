@@ -11,6 +11,8 @@ A coffee shop and bookstore in the Experimental Station on the South Side of Chi
 
 <!--more-->
 
+***
+
 ![Build Coffee](/img/portfolio/buildcoffee.jpg)
 
 I started Build Coffee with Hannah Nyhart in the Summer of 2017. 

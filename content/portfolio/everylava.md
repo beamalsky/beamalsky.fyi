@@ -11,6 +11,8 @@ A groovy Twitter bot
 
 <!--more-->
 
+***
+
 ![An @everylava lavalamp](/img/portfolio/everylava.jpg)
 
 [@everylava](https://twitter.com/everylava) generates a new SVG lava lamp every 3 hours. I made it with Tracery in Cheap Bots Done Quick, and the source code can be found [here](https://cheapbotsdonequick.com/source/everylava).

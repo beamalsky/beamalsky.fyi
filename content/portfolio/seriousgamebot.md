@@ -11,6 +11,8 @@ A Tracery Twitter bot generating four serious game ideas a day
 
 <!--more-->
 
+***
+
 [@seriousgamebot](https://twitter.com/seriousgamebot) generates a new (very) serious game idea every 6 hours. I made it with Tracery in Cheap Bots Done Quick, and the source code can be found [here](https://cheapbotsdonequick.com/source/seriousgamebot).
 
 
