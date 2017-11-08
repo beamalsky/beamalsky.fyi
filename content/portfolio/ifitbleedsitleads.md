@@ -22,3 +22,5 @@ Chicago has seen 146 murders so far this year. What would it mean to cover them 
 ***
 
 Read the full article [here](https://southsideweekly.com/if-it-bleeds-it-leads/).
+
+The rest of my writing for the Weekly can be found [here](https://southsideweekly.com/author/bea-malsky/).
