@@ -1,7 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/hearsay.png"
+image = "img/portfolio/hearsay.jpg"
 date = "2017-10-11"
 title = "Hearsay"
 weight = 0

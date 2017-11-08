@@ -1,8 +1,7 @@
 +++
 showonlytext = true
 draft = false
-image = ""
-#image = "img/portfolio/berlant.jpg"
+image = "img/portfolio/berlant.jpg"
 date = "2017-10-11"
 title = "Pleasure Won: A Conversation with Lauren Berlant"
 weight = 4

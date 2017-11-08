@@ -1,8 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = ""
-#image = "img/portfolio/churchonthe9.jpg"
+image = "img/portfolio/churchonthe9.jpg"
 date = "2017-10-11"
 title = "At Church on the 9, A Spotlight on Black Joy"
 weight = 0
