@@ -23,6 +23,6 @@ Intended for use in high school classrooms, *Infection City* enlists its most tr
 
 A key takeaway of the game is the social nature of disease outbreaks and treatment. In *Infection City*, the disease and epidemiologists literally play by different rules—while the city officials must follow ward boundaries and invest time in treatment and building up vaccine resources at clinics, the meningitis player schemes from a set of available spread patterns and reacts to natural and human forces. Though the game’s abstraction of Chicago begins with equally-distributed resources, it quickly spins out into pockets of vulnerable populations based on how the players allocate clinics.
 
-In the future, I hope to develop different decks for *Infection City* that let players choose their epidemiological threat.
+The next step in *Infection City*'s design is to develop different decks to let players choose and customize their epidemiological threat.
 
 ![The Infection City board](/img/portfolio/infectioncity.jpg)

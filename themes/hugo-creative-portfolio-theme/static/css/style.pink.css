@@ -2143,7 +2143,13 @@ a.list-group-item.active > .badge,
   margin-left: 3px;
 }
 
+/* Custom CSS -Bea*/
+
 img[src$=".svg"] {
   width:100%;
   height:auto;
+}
+
+img {
+  max-width: 100%;
 }

@@ -7,7 +7,7 @@ title = "Caduceus Quest"
 weight = 4
 +++
 
-An adventure-RPG that lets its players explore STEM careers as character classes
+An adventure-RPG where players explore STEM careers as character classes
 
 <!--more-->
 

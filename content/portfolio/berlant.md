@@ -7,7 +7,7 @@ title = "Pleasure Won: A Conversation with Lauren Berlant"
 weight = 4
 +++
 
-An interview with the renowned affect theorist for The Point Magazine’s <i>What Is America For?</i> issue
+An interview with the illustrious affect theorist for The Point Magazine’s <i>What Is America For?</i> issue
 
 <!--more-->
 

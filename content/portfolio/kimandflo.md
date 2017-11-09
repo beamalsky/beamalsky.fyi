@@ -21,4 +21,4 @@ An essay on casual games and affective labor for <i>The New Inquiry</i>
 
 Read the full essay [here](https://thenewinquiry.com/managing-hearts-with-kim-and-flo/). 
 
-This was an adaptation of my undergraduate thesis, which was published in the Chicago Jounral of Sociology and can be accessed [here](/img/portfolio/kimandflo2.pdf).
+This was an adaptation of my undergraduate thesis, which was published in the Chicago Journal of Sociology and can be accessed [here](/img/portfolio/kimandflo2.pdf).
