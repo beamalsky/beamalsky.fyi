@@ -2142,3 +2142,8 @@ a.list-group-item.active > .badge,
 .nav-pills > li > a > .badge {
   margin-left: 3px;
 }
+
+img[src$=".svg"] {
+  width:100%;
+  height:auto;
+}
