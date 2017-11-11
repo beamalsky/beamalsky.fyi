@@ -15,7 +15,7 @@ A month of queer zines at the University of Chicago Center for the Study of Gend
 
 ![The opening poster for Please Unfold](/img/portfolio/pleaseunfold.jpg)
 
-*Please Unfold* was a gallery show, mini zine fest, and series of panels I curated with [Jean Cochrane](http://jeancochrane.com/) at the UChicago Chicago Center for the Study of Gender & Sexuality. It featured a 5-year retrospective on Amber Sollenberger's [F.E.M.M.E.](https://thefemmezine.weebly.com/) zine and three panels on making, collecting, and studying zines.
+*Please Unfold* was a gallery show, mini zine fest, and series of panels I curated with [Jean Cochrane](http://jeancochrane.com/) at the University of Chicago Center for the Study of Gender & Sexuality. It featured a 5-year retrospective on Amber Sollenberger's [F.E.M.M.E.](https://thefemmezine.weebly.com/) zine and three panels on making, collecting, and studying zines.
 
 The Facebook event is live [here](http://buildcoffee.org).
 
