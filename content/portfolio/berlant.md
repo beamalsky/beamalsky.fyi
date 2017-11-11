@@ -5,6 +5,7 @@ image = "img/portfolio/berlant.jpg"
 date = "2017-10-11"
 title = "Pleasure Won: A Conversation with Lauren Berlant"
 weight = 4
+tags = ["writing"]
 +++
 
 An interview with the illustrious affect theorist for The Point Magazine’s <i>What Is America For?</i> issue
