@@ -1,6 +1,7 @@
 +++
 showonlyimage = false
 draft = false
+frontpage = false
 image = "img/portfolio/churchonthe9.jpg"
 date = "2017-10-11"
 title = "At Church on the 9, A Spotlight on Black Joy"

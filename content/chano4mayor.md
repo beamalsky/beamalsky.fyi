@@ -1,6 +1,7 @@
 +++
 showonlyimage = true
 draft = false
+frontpage = false
 image = "img/portfolio/chano4mayor_square.jpg"
 date = "2017-10-11"
 title = "#chano4mayor"

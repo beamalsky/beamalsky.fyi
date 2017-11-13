@@ -1,6 +1,7 @@
 +++
 showonlyimage = true
 draft = false
+frontpage = true
 image = "img/portfolio/codeofsilence.jpg"
 date = "2017-10-11"
 title = "Code of Silence"

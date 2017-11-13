@@ -1,6 +1,7 @@
 +++
 showonlyimage = false
 draft = false
+frontpage = false
 image = "img/portfolio/buildcoffee.jpg"
 date = "2017-10-11"
 title = "Build Coffee"

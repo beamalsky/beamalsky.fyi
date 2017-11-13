@@ -1,6 +1,7 @@
 +++
 showonlyimage = false
 draft = false
+frontpage = true
 image = "img/portfolio/caduceusquest.jpg"
 date = "2017-10-11"
 title = "Caduceus Quest"
