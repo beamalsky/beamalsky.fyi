@@ -26,7 +26,7 @@ I did print and map design for a standalone 40-page newsprint magazine edition o
 
 ![The Code of Silence, printed](/img/portfolio/codeofsilence5.jpg)
 
-A PDF of the print edition can be found [here](https://static1.squarespace.com/static/5385f942e4b0f52de5677500/t/586c26caf7e0ab61f65ebac9/1483482862215/CodeofSilence_final.pdf).
+A PDF of the print edition can be found [here](/img/portfolio/codeofsilence7.pdf).
 
 
 ![An inDesign spread from the Code of Silence](/img/portfolio/codeofsilence6.png)
