@@ -1,5 +1,5 @@
 +++
-showonlyimage = true
+showonlyimage = false
 draft = false
 frontpage = true
 image = "img/portfolio/chano4mayor_square.jpg"
