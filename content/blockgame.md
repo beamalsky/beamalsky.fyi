@@ -41,6 +41,8 @@ weight = 1
 		var keyboardMoveLeft = false;
 		var keyboardMoveRight = false;
 
+		window.addEventListener("load", init);
+
 		function init() {
 			stage = new createjs.Stage("demoCanvas");
 
@@ -58,8 +60,8 @@ weight = 1
 			addToScore(0);
 
 			//load sounds
-			createjs.Sound.registerSound("assets/hit.wav", "hit_brick");
-			createjs.Sound.registerSound("assets/blockGame.mp3", "bgm");
+			createjs.Sound.registerSound("/blockgame/hit.wav", "hit_brick");
+			createjs.Sound.registerSound("/blockgame/blockGame.mp3", "bgm");
 			createjs.Sound.play("bgm");
 
 			window.onkeyup = keyUpHandler;
