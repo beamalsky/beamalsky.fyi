@@ -2153,3 +2153,7 @@ img[src$=".svg"] {
 img {
   max-width: 100%;
 }
+
+canvas {
+  max-width: 100%;
+}
