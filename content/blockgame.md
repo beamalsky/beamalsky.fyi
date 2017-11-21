@@ -1,12 +1,19 @@
-<html>
++++
+showonlyimage = false
+draft = false
+frontpage = false
+image = "img/portfolio/buildcoffee.jpg"
+date = "2017-10-11"
+title = "Block Game"
+weight = 1
++++
 
-<head>
-	<title>Block Game</title>
-	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-</head>
+<!--more-->
 
-<body onload="init();">
-	<canvas id="demoCanvas" width="500" height="650"></canvas>
+***
+
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<canvas id="demoCanvas" width="500" height="650"></canvas>
 	<script>
 		const PADDLE_WIDTH = 75;
 		const PADDLE_HEIGHT = 15;
@@ -32,6 +39,8 @@
 		const SPACEBAR = 32;
 		var keyboardMoveLeft = false;
 		var keyboardMoveRight = false;
+
+		window.addEventListener("load", init);
 
 		function init() {
 			stage = new createjs.Stage("demoCanvas");
@@ -345,6 +354,6 @@
 			return hex;
 		}
 	</script>
-</body>
 
-</html>
+
+	
