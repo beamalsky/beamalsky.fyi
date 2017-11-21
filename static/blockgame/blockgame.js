@@ -1,3 +1,6 @@
+		window.addEventListener("load", init);
+		// 	createjs.Sound.registerSound("/blockgame/hit.wav", "hit_brick"); createjs.Sound.registerSound("/blockgame/blockGame.mp3", "bgm");
+
 		const PADDLE_WIDTH = 75;
 		const PADDLE_HEIGHT = 15;
 		const BRICKS_WIDTH = 60;
@@ -10,8 +13,8 @@
 		var paddle;
 		var ball;
 		var bricks = [];
-		var brickColor = randomHex();
-		var paddleColor = randomHex();
+		var brickColor;
+		var paddleColor;
 		var score = 0;
 		var lives = 3;
 		var scoreText;
@@ -24,8 +27,6 @@
 		var keyboardMoveLeft = false;
 		var keyboardMoveRight = false;
 
-		window.addEventListener("load", init);
-
 		function init() {
 			stage = new createjs.Stage("demoCanvas");
 
@@ -34,7 +35,8 @@
 			createjs.Ticker.addEventListener("tick", tick);
 
 			demoCanvas.style.backgroundColor = randomHex();
-			demoCanvas.alpha = .5;
+			brickColor = randomHex();
+			paddleColor = randomHex();
 
 			createBrickGrid();
 			createPaddle();
@@ -45,7 +47,6 @@
 			//load sounds
 			createjs.Sound.registerSound("/blockgame/hit.wav", "hit_brick");
 			createjs.Sound.registerSound("/blockgame/blockGame.mp3", "bgm");
-			createjs.Sound.play("bgm");
 
 			window.onkeyup = keyUpHandler;
 			window.onkeydown = keyDownHandler;
@@ -66,6 +67,11 @@
 				ball.ySpeed = 7;
 				ball.up = true;
 				ball.right = Boolean(Math.floor(Math.random() * 2));
+			}
+
+			if (!bgmStarted) {
+				createjs.Sound.play("bgm");
+				bgmStarted = true;
 			}
 		}
 
@@ -114,16 +120,45 @@
 
 			demoCanvas.style.backgroundColor = randomHex();
 
-			gameStarted = false;		
+			gameStarted = false;
+
+			if (lives < 0) {
+				loseGame();
+			}		
+		}
+
+		function loseGame() {
+
+			if (confirm("You lost. :(\n\nWould you like to play again?") == true) {
+				lives = 3;
+				score = 0;
+				init();
+			} else {
+				console.log("you lost!")
+			}
+		}
+
+		function winGame() {
+
+			ball.xSpeed = 0;
+			ball.ySpeed = 0;
+			ball.x = paddle.x;
+			ball.y = paddle.y - PADDLE_HEIGHT / 2 - BALL_RADIUS;	
+
+			demoCanvas.style.backgroundColor = randomHex();
+
+			gameStarted = false;
+
+			if (confirm("You won! :)\n\nWould you like to play again?") == true) {
+				gameStarted = false;
+				lives += 3;
+				init();
+			} else {
+				console.log("no replay");
+			}
 		}
 
 		function tick() {
-
-			//start bgm
-			if (bricks.length === 42 && !bgmStarted) {
-				createjs.Sound.play("bgm");
-				bgmStarted = true;
-			}
 
 			//keyboard movement
 			if (keyboardMoveLeft) {
@@ -309,6 +344,10 @@
 
 		function removeBrickFromScreen(brick) {
 			stage.removeChild(brick);
+
+			if (bricks.length === 0) {
+				winGame();
+			}
 		}
 
 		function createBall() {
@@ -348,12 +387,4 @@
 				hex += rand
 			}
 			return hex;
-		}
-
-		function loadSound(link, name) {
-			createjs.Sound.registerSound(link, name);
-		}
-
-		function playSound(name) {
-
 		}
