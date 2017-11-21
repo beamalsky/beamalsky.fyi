@@ -13,8 +13,8 @@ weight = 1
 ***
 
 <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-<canvas id="demoCanvas" width="500" height="650"></canvas>
-	<script>
+<canvas id="demoCanvas" width="500" height="700"></canvas>
+<script>
 		const PADDLE_WIDTH = 75;
 		const PADDLE_HEIGHT = 15;
 		const BRICKS_WIDTH = 60;
@@ -33,14 +33,13 @@ weight = 1
 		var lives = 3;
 		var scoreText;
 		var gameStarted = false;
+		var bgmStarted = false;
 
 		const KEYCODE_LEFT = 37;
 		const KEYCODE_RIGHT = 39;
 		const SPACEBAR = 32;
 		var keyboardMoveLeft = false;
 		var keyboardMoveRight = false;
-
-		window.addEventListener("load", init);
 
 		function init() {
 			stage = new createjs.Stage("demoCanvas");
@@ -57,6 +56,11 @@ weight = 1
 			createBall();
 			createScoreText();
 			addToScore(0);
+
+			//load sounds
+			createjs.Sound.registerSound("assets/hit.wav", "hit_brick");
+			createjs.Sound.registerSound("assets/blockGame.mp3", "bgm");
+			createjs.Sound.play("bgm");
 
 			window.onkeyup = keyUpHandler;
 			window.onkeydown = keyDownHandler;
@@ -130,6 +134,12 @@ weight = 1
 
 		function tick() {
 
+			//start bgm
+			if (bricks.length === 42 && !bgmStarted) {
+				createjs.Sound.play("bgm");
+				bgmStarted = true;
+			}
+
 			//keyboard movement
 			if (keyboardMoveLeft) {
 				paddle.x -= PADDLE_SPEED;
@@ -179,6 +189,7 @@ weight = 1
 			for (var i = 0; i < bricks.length; i++) {
 				if (checkCollision(ball, bricks[i])) {
 					addToScore(100);
+					createjs.Sound.play("hit_brick");
 					destroyBrick(bricks[i]);
 					bricks.splice(i, 1);
 					i--;
@@ -336,7 +347,7 @@ weight = 1
 			paddle.graphics.beginFill(paddleColor).beginStroke('#FFFFFF').drawRect(0, 0, PADDLE_WIDTH, PADDLE_HEIGHT);
 			
 			paddle.x = stage.canvas.width / 2 - PADDLE_WIDTH / 2;
-			paddle.y = stage.canvas.height * .9;
+			paddle.y = stage.canvas.height * .87;
 		    paddle.regX = PADDLE_WIDTH/2;
 	        paddle.regY = PADDLE_HEIGHT/2;
 		    paddle.setBounds(paddle.regX,paddle.regY,PADDLE_WIDTH,PADDLE_HEIGHT);
@@ -353,7 +364,4 @@ weight = 1
 			}
 			return hex;
 		}
-	</script>
-
-
-	
+</script>
