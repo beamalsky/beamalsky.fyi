@@ -13,5 +13,7 @@ weight = 1
 ***
 
 <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-<canvas id="demoCanvas" width="500" height="700"></canvas>
 <script src="/blockgame/blockgame.js"></script>
+<script src="/blockgame/blockgame1.js"></script>
+<script src="/blockgame/blockgame2.js"></script>
+<canvas id="demoCanvas" width="500" height="700"></canvas>
