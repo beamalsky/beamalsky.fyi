@@ -22,7 +22,7 @@ We made *Hearsay* for high school sex ed classrooms to prompt discussions about 
 
 ![An example game of Hearsay](/img/portfolio/hearsay2.jpg)
 
-*Hearsay* aligns with the lab's work toward reproductive justice through the destigmatization of reproductive health care and improved sexual health education. It aims  to not over-determine the stories its players are telling, and to work with a sex ed curriculum that allows students think through how contraception fits into their own lives and the lives of people around them—not as something taboo and scary, but as something normal, healthy, and worth discussing.
+*Hearsay* aligns with the lab's work toward reproductive justice through the destigmatization of reproductive health care and improved sexual health education. It aims  to not over-determine the stories its players are telling, and to work with a sex ed curriculum that allows students to think through how contraception fits into their own lives and the lives of people around them—not as something taboo and scary, but as something normal, healthy, and worth discussing.
 
 ![Hearsay in action](/img/portfolio/hearsay3.jpg)
 
