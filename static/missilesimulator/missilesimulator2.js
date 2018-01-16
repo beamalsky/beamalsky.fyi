@@ -1,46 +1,31 @@
 window.addEventListener("load", init);
 
-var DIFFICULTY = 2;			//how fast the game gets mor difficult
-var ROCK_TIME = 110;		//aprox tick count until a new asteroid gets introduced
-var SUB_ROCK_COUNT = 4;		//how many small rocks to make on rock death
-var BULLET_TIME = 5;		//ticks between bullets
-var BULLET_ENTROPY = 100;	//how much energy a bullet has before it runs out.
-
-var TURN_FACTOR = 7;		//how far the ship turns per frame
-var BULLET_SPEED = 17;		//how fast the bullets move
-
-var KEYCODE_ENTER = 13;		//useful keycode
 var KEYCODE_SPACE = 32;		//useful keycode
 var KEYCODE_UP = 38;		//useful keycode
+var KEYCODE_DOWN = 40
 var KEYCODE_LEFT = 37;		//useful keycode
 var KEYCODE_RIGHT = 39;		//useful keycode
-var KEYCODE_W = 87;			//useful keycode
-var KEYCODE_A = 65;			//useful keycode
-var KEYCODE_D = 68;			//useful keycode
+var KEYCODE_W = 87;
+var KEYCODE_A = 65;
+var KEYCODE_S = 83;
+var KEYCODE_D = 68;
+
 
 var manifest;           // used to register sounds for preloading
 var preload;
 
-var shootHeld;			//is the user holding a shoot command
+var clickHeld;			//is the user holding a shoot command
 var lfHeld;				//is the user holding a turn left command
 var rtHeld;				//is the user holding a turn right command
-var fwdHeld;			//is the user holding a forward command
-
-var timeToRock;			//difficulty adjusted version of ROCK_TIME
-var nextRock;			//ticks left until a new space rock arrives
-var nextBullet;			//ticks left until the next shot is fired
-
-var rockBelt;			//space rock array
-var bulletStream;		//bullet array
+var upHeld;				//is the user holding an up command
+var dnHeld;			//is the user holding a down command
 
 var canvas;			//Main canvas
 var stage;			//Main display stage
 
-var ship;			//the actual ship
-var alive;			//wheter the player is alive
+var hand;			//the clicker
 
-var messageField;		//Message display field
-var scoreField;			//score Field
+var messageField;		//the mssage display field
 
 var loadingInterval = 0;
 
@@ -49,7 +34,7 @@ document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
 //introText
-introText = "It's Saturday January 13, 2018,\nand you're beginning your shift at the\nHawaii Emergency Management Agency."
+introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\nUse the arrow keys to move.\n\nClick to start and select."
 
 function init() {
 	if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -74,14 +59,16 @@ function init() {
 	messageField.textAlign = "center";
 	messageField.textBaseline = "middle";
 	messageField.x = canvas.width / 2;
-	messageField.y = canvas.height / 2;
+	messageField.y = canvas.height / 2 - 180;
 	stage.addChild(messageField);
 	stage.update(); 	//update the stage to show text
 
-	// begin loading content (only sounds to load)
+	// begin loading content
 	var assetsPath = "";
 	manifest = [
 		{id: "bgm", src: "the_buzzcocks_why_cant_i_touch_it.mp3"},
+		{id: "world", src: "hand.png"},
+		{id: "hand_img", src: "hand.png"},
 	];
 
 	//createjs.Sound.alternateExtensions = ["mp3"];
@@ -106,11 +93,6 @@ function updateLoading() {
 
 function doneLoading(event) {
 	clearInterval(loadingInterval);
-	scoreField = new createjs.Text("0", "bold 18px Arial", "#FFFFFF");
-	scoreField.textAlign = "right";
-	scoreField.x = canvas.width - 20;
-	scoreField.y = 20;
-	scoreField.maxWidth = 1000;
 
 	messageField.text = introText;
 
@@ -132,8 +114,8 @@ function handleClick() {
 	canvas.onclick = null;
 	stage.removeChild(messageField);
 
-	// indicate the player is now on screen
-	createjs.Sound.play("begin");
+	// TK indicate the player is now on screen
+	//createjs.Sound.play("begin");
 
 	restart();
 }
@@ -142,29 +124,22 @@ function handleClick() {
 function restart() {
 	//hide anything on stage and show the score
 	stage.removeAllChildren();
-	scoreField.text = (0).toString();
-	stage.addChild(scoreField);
 
-	//new arrays to dump old data
-	rockBelt = [];
-	bulletStream = [];
+	var hand = new createjs.Bitmap("hand_img");
+	console.log(hand);
 
 	//create the player
 	alive = true;
-	ship = new Ship();
-	ship.x = canvas.width / 2;
-	ship.y = canvas.height / 2;
-
-	//log time untill values
-	timeToRock = ROCK_TIME;
-	nextRock = nextBullet = 0;
+	//hand = "hand_img";
+	hand.x = canvas.width / 2;
+	hand.y = canvas.height / 2;
 
 	//reset key presses
-	shootHeld = lfHeld = rtHeld = fwdHeld = dnHeld = false;
+	//shootHeld = lfHeld = rtHeld = upHeld = dnHeld = false;
 
-	//ensure stage is blank and add the ship
+	//ensure stage is blank and add the hand
 	stage.clear();
-	stage.addChild(ship);
+	stage.addChild(hand);
 
 	//start game timer
 	if (!createjs.Ticker.hasEventListener("tick")) {
@@ -172,147 +147,8 @@ function restart() {
 	}
 }
 
-function tick(event) {
-	//handle firing
-	if (nextBullet <= 0) {
-		if (alive && shootHeld) {
-			nextBullet = BULLET_TIME;
-			fireBullet();
-		}
-	} else {
-		nextBullet--;
-	}
-
-	//handle turning
-	if (alive && lfHeld) {
-		ship.rotation -= TURN_FACTOR;
-	} else if (alive && rtHeld) {
-		ship.rotation += TURN_FACTOR;
-	}
-
-	//handle thrust
-	if (alive && fwdHeld) {
-		ship.accelerate();
-	}
-
-	//handle new spaceRocks
-	if (nextRock <= 0) {
-		if (alive) {
-			timeToRock -= DIFFICULTY;	//reduce spaceRock spacing slowly to increase difficulty with time
-			var index = getSpaceRock(SpaceRock.LRG_ROCK);
-			rockBelt[index].floatOnScreen(canvas.width, canvas.height);
-			nextRock = timeToRock + timeToRock * Math.random();
-		}
-	} else {
-		nextRock--;
-	}
-
-	//handle ship looping
-	if (alive && outOfBounds(ship, ship.bounds)) {
-		placeInBounds(ship, ship.bounds);
-	}
-
-	//handle bullet movement and looping
-	for (bullet in bulletStream) {
-		var o = bulletStream[bullet];
-		if (!o || !o.active) {
-			continue;
-		}
-		if (outOfBounds(o, ship.bounds)) {
-			placeInBounds(o, ship.bounds);
-		}
-		o.x += Math.sin(o.rotation * (Math.PI / -180)) * BULLET_SPEED;
-		o.y += Math.cos(o.rotation * (Math.PI / -180)) * BULLET_SPEED;
-
-		if (--o.entropy <= 0) {
-			stage.removeChild(o);
-			o.active = false;
-		}
-	}
-
-	//handle spaceRocks (nested in one loop to prevent excess loops)
-	for (spaceRock in rockBelt) {
-		var o = rockBelt[spaceRock];
-		if (!o || !o.active) {
-			continue;
-		}
-
-		//handle spaceRock movement and looping
-		if (outOfBounds(o, o.bounds)) {
-			placeInBounds(o, o.bounds);
-		}
-		o.tick(event);
-
-		//handle spaceRock ship collisions
-		if (alive && o.hitRadius(ship.x, ship.y, ship.hit)) {
-			alive = false;
-
-			stage.removeChild(ship);
-			messageField.text = "You're dead:  Click or hit enter to play again";
-			stage.addChild(messageField);
-			watchRestart();
-
-			//play death sound
-			createjs.Sound.play("death", {interrupt: createjs.Sound.INTERRUPT_ANY});
-			continue;
-		}
-
-		//handle spaceRock bullet collisions
-		for (bullet in bulletStream) {
-			var p = bulletStream[bullet];
-			if (!p || !p.active) {
-				continue;
-			}
-
-			if (o.hitPoint(p.x, p.y)) {
-				var newSize;
-				switch (o.size) {
-					case SpaceRock.LRG_ROCK:
-						newSize = SpaceRock.MED_ROCK;
-						break;
-					case SpaceRock.MED_ROCK:
-						newSize = SpaceRock.SML_ROCK;
-						break;
-					case SpaceRock.SML_ROCK:
-						newSize = 0;
-						break;
-				}
-
-				//score
-				if (alive) {
-					addScore(o.score);
-				}
-
-				//create more
-				if (newSize > 0) {
-					var i;
-					var index;
-					var offSet;
-
-					for (i = 0; i < SUB_ROCK_COUNT; i++) {
-						index = getSpaceRock(newSize);
-						offSet = (Math.random() * o.size * 2) - o.size;
-						rockBelt[index].x = o.x + offSet;
-						rockBelt[index].y = o.y + offSet;
-					}
-				}
-
-				//remove
-				stage.removeChild(o);
-				rockBelt[spaceRock].active = false;
-
-				stage.removeChild(p);
-				bulletStream[bullet].active = false;
-
-				// play sound
-				createjs.Sound.play("break", {interrupt: createjs.Sound.INTERUPT_LATE, offset: 0.8});
-			}
-		}
-	}
-
-	//call sub ticks
-	ship.tick(event);
-	stage.update(event);
+function tick() {
+	stage.update();
 }
 
 function outOfBounds(o, bounds) {
@@ -336,72 +172,6 @@ function placeInBounds(o, bounds) {
 	}
 }
 
-function fireBullet() {
-	//create the bullet
-	var o = bulletStream[getBullet()];
-	o.x = ship.x;
-	o.y = ship.y;
-	o.rotation = ship.rotation;
-	o.entropy = BULLET_ENTROPY;
-	o.active = true;
-
-	//draw the bullet
-	o.graphics.beginStroke("#FFFFFF").moveTo(-1, 0).lineTo(1, 0);
-
-	// play the shot sound
-	createjs.Sound.play("laser", {interrupt: createjs.Sound.INTERUPT_LATE});
-}
-
-function getSpaceRock(size) {
-	var i = 0;
-	var len = rockBelt.length;
-
-	//pooling approach
-	while (i <= len) {
-		if (!rockBelt[i]) {
-			rockBelt[i] = new SpaceRock(size);
-			break;
-		} else if (!rockBelt[i].active) {
-			rockBelt[i].activate(size);
-			break;
-		} else {
-			i++;
-		}
-	}
-
-	if (len == 0) {
-		rockBelt[0] = new SpaceRock(size);
-	}
-
-	stage.addChild(rockBelt[i]);
-	return i;
-}
-
-function getBullet() {
-	var i = 0;
-	var len = bulletStream.length;
-
-	//pooling approach
-	while (i <= len) {
-		if (!bulletStream[i]) {
-			bulletStream[i] = new createjs.Shape();
-			break;
-		} else if (!bulletStream[i].active) {
-			bulletStream[i].active = true;
-			break;
-		} else {
-			i++;
-		}
-	}
-
-	if (len == 0) {
-		bulletStream[0] = new createjs.Shape();
-	}
-
-	stage.addChild(bulletStream[i]);
-	return i;
-}
-
 //allow for WASD and arrow control scheme
 function handleKeyDown(e) {
 	//cross browser issues exist
@@ -410,7 +180,7 @@ function handleKeyDown(e) {
 	}
 	switch (e.keyCode) {
 		case KEYCODE_SPACE:
-			shootHeld = true;
+			clickHeld = true;
 			return false;
 		case KEYCODE_A:
 		case KEYCODE_LEFT:
@@ -422,12 +192,11 @@ function handleKeyDown(e) {
 			return false;
 		case KEYCODE_W:
 		case KEYCODE_UP:
-			fwdHeld = true;
+			upHeld = true;
 			return false;
-		case KEYCODE_ENTER:
-			if (canvas.onclick == handleClick) {
-				handleClick();
-			}
+		case KEYCODE_S:
+		case KEYCODE_DOWN:
+			dnHeld = true;
 			return false;
 	}
 }
@@ -439,7 +208,7 @@ function handleKeyUp(e) {
 	}
 	switch (e.keyCode) {
 		case KEYCODE_SPACE:
-			shootHeld = false;
+			clickHeld = false;
 			break;
 		case KEYCODE_A:
 		case KEYCODE_LEFT:
@@ -451,22 +220,10 @@ function handleKeyUp(e) {
 			break;
 		case KEYCODE_W:
 		case KEYCODE_UP:
-			fwdHeld = false;
+			upHeld = false;
 			break;
+		case KEYCODE_S:
+		case KEYCODE_DOWN:
+			dnHeld = false;
 	}
-}
-
-function addScore(value) {
-	//trust the field will have a number and add the score
-	scoreField.text = (Number(scoreField.text) + Number(value)).toString();
-}
-
-function randomHex() {
-	var hex = "#"
-	var hexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","a","b","c","d","e","f"];
-	for (i = 0; i < 6; i++) {
-		var rand = hexArray[Math.floor(Math.random() * hexArray.length)]
-		hex += rand
-	}
-	return hex;
 }
