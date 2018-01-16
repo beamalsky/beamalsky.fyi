@@ -327,7 +327,8 @@ function endGame() {
 
 	mainCanvas.style.backgroundColor = "#000000";
 
-	messageField.text = "It's over!\n\n\nYou chose " + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
+	messageField.text = "It's over!\n\n\nYou chose\n\n" + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
+	messageField.y = canvas.height / 2 - 150;
 	stage.addChild(messageField);
 
 	watchRestart();
