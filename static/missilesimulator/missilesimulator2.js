@@ -1,14 +1,17 @@
 window.addEventListener("load", init);
 
-var KEYCODE_SPACE = 32;		//useful keycode
-var KEYCODE_UP = 38;		//useful keycode
-var KEYCODE_DOWN = 40
-var KEYCODE_LEFT = 37;		//useful keycode
-var KEYCODE_RIGHT = 39;		//useful keycode
-var KEYCODE_W = 87;
-var KEYCODE_A = 65;
-var KEYCODE_S = 83;
-var KEYCODE_D = 68;
+const KEYCODE_SPACE = 32;		//useful keycode
+const KEYCODE_UP = 38;		//useful keycode
+const KEYCODE_DOWN = 40
+const KEYCODE_LEFT = 37;		//useful keycode
+const KEYCODE_RIGHT = 39;		//useful keycode
+const KEYCODE_W = 87;
+const KEYCODE_A = 65;
+const KEYCODE_S = 83;
+const KEYCODE_D = 68;
+
+const HAND_SPEED = 7;
+const FPS = 20;
 
 
 var manifest;           // used to register sounds for preloading
@@ -67,8 +70,6 @@ function init() {
 	var assetsPath = "";
 	manifest = [
 		{id: "bgm", src: "the_buzzcocks_why_cant_i_touch_it.mp3"},
-		{id: "world", src: "hand.png"},
-		{id: "hand_img", src: "hand.svg"},
 	];
 
 	//createjs.Sound.alternateExtensions = ["mp3"];
@@ -125,29 +126,46 @@ function restart() {
 	//hide anything on stage and show the score
 	stage.removeAllChildren();
 
-	var hand = new createjs.Bitmap("hand_img");
-	console.log(hand);
-
 	//create the player
 	alive = true;
-	//hand = "hand_img";
+	hand = new createjs.Bitmap("hand.png");
+	hand.scaleX = 0.05;
+	hand.scaleY = 0.05;
 	hand.x = canvas.width / 2;
 	hand.y = canvas.height / 2;
-
-	//reset key presses
-	//shootHeld = lfHeld = rtHeld = upHeld = dnHeld = false;
+	hand.setBounds(hand.regX,hand.regY,10,10);
 
 	//ensure stage is blank and add the hand
 	stage.clear();
 	stage.addChild(hand);
+	console.log(hand.getBounds());
 
-	//start game timer
-	if (!createjs.Ticker.hasEventListener("tick")) {
-		createjs.Ticker.addEventListener("tick", tick);
-	}
+	createjs.Ticker.setFPS(FPS);
+	createjs.Ticker.addEventListener("tick", tick);
+
 }
 
 function tick() {
+
+	//handle movement controls
+	if (lfHeld) {
+		hand.x -= HAND_SPEED;
+	}
+	if (rtHeld) {
+		hand.x += HAND_SPEED;
+	}
+	if (upHeld) {
+		hand.y -= HAND_SPEED;
+	}
+	if (dnHeld) {
+		hand.y += HAND_SPEED;
+	}
+
+	//handle ship looping
+	if (outOfBounds(hand, hand.getBounds())) {
+		placeInBounds(hand, hand.getBounds());
+	}
+
 	stage.update();
 }
 
