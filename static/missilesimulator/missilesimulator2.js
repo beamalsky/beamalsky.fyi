@@ -68,7 +68,7 @@ function init() {
 	manifest = [
 		{id: "bgm", src: "the_buzzcocks_why_cant_i_touch_it.mp3"},
 		{id: "world", src: "hand.png"},
-		{id: "hand_img", src: "hand.png"},
+		{id: "hand_img", src: "hand.svg"},
 	];
 
 	//createjs.Sound.alternateExtensions = ["mp3"];
