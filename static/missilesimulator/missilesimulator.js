@@ -1,8 +1,5 @@
 window.addEventListener("load", init);
 
-var bgmStarted = false;
-var bgm;
-
 function init() {
 
 	canvas = document.getElementById("mainCanvas");
@@ -16,8 +13,9 @@ function init() {
 
 	mainCanvas.style.backgroundColor = randomHex();
 
-	createjs.Sound.registerSound("/blockgame/blockGame.mp3", "bgm");
-	//createjs.Sound.play("bgm");
+	createjs.Sound.registerSound("the_buzzcocks_why_cant_i_touch_it.mp3", "bgm");
+	var bgm = createjs.Sound.play("bgm");
+	console.log(bgm)
 
 	//load sounds
 	//createjs.Sound.registerSound("the_buzzcocks_why_cant_i_touch_it.mp3", "bgm");
@@ -27,10 +25,6 @@ function init() {
 }
 
 function tick() {
-	if (!bgmStarted) {
-		bgm = createjs.Sound.play("bgm");
-		bgmStarted = true;
-	}
 
 	stage.update();
 
