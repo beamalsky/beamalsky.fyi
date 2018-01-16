@@ -13,7 +13,7 @@ function init() {
 
 	mainCanvas.style.backgroundColor = randomHex();
 
-	createjs.Sound.registerSound("the_buzzcocks_why_cant_i_touch_it.mp3", "bgm");
+	createjs.Sound.registerSound("https://beamalsky.fyi/missilesimulator/the_buzzcocks_why_cant_i_touch_it.mp3", "bgm");
 	var bgm = createjs.Sound.play("bgm");
 	console.log(bgm)
 
