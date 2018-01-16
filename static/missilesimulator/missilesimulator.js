@@ -10,10 +10,14 @@ const KEYCODE_A = 65;
 const KEYCODE_S = 83;
 const KEYCODE_D = 68;
 
-const HAND_SPEED = 7;
-const FPS = 20;
+const HAND_SPEED = 10;
+const FPS = 15;
+
+var hand_width = 10;
+var hand_height = 10;
 
 var gameStarted = false; 
+var selectedAlarm;
 
 var manifest;           // used to register sounds for preloading
 var preload;
@@ -31,6 +35,7 @@ var hand;			//the clicker
 
 var messageField;		//the message display field
 var alarmField;			//the alarm display field
+var alarms = [];
 
 var loadingInterval = 0;
 
@@ -39,7 +44,7 @@ document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
 //introText
-introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\nUse the arrow keys to move.\n\nClick to start and select."
+introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\nUse the arrow keys to move.\n\nHit space to start and select."
 
 //alarmText
 alarm1 = "BMD False Alarm";
@@ -52,6 +57,9 @@ alarm7 = "DRILL - PACOM (CDW) - STATE ONLY";
 alarm8 = "Landslide - Hanna Road Closure";
 alarm9 = "Amber Alert DEMO TEST";
 alarm10 = "High Surf Warning North Shores";
+
+//endText
+//var endText = "It's over!\n\nYou chose " + selectedAlarm + ".\n\nWow that was not right at all."
 
 function init() {
 	if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -141,8 +149,14 @@ function handleClick() {
 		restart();
 		gameStarted = true;
 	} else {
-		console.log("you clicked once the game started!");
-		createjs.Sound.play("click");
+		//createjs.Sound.play("click");
+
+		for (var i = 0; i < alarms.length; i++) {
+			if (checkCollision(hand, alarms[i])) {
+				selectedAlarm = alarms[i];
+				endGame();
+			}
+		}
 	}
 
 }
@@ -158,72 +172,24 @@ function restart() {
 	hand = new createjs.Bitmap("hand.png");
 	hand.scaleX = 0.05;
 	hand.scaleY = 0.05;
+	hand.regX = 15;
 	hand.x = canvas.width / 2;
 	hand.y = canvas.height / 2;
-	hand.setBounds(hand.regX,hand.regY,10,10);
 
-	//create alarm text1
-	alarmField1 = new createjs.Text(alarm1, "bold 20px Times", "#0645AD");
-	alarmField1.x = 40;
-	alarmField1.y = canvas.height / 5;
-
-	//create alarm text2
-	alarmField2 = new createjs.Text(alarm2, "bold 20px Times", "#0645AD");
-	alarmField2.x = 40;
-	alarmField2.y = canvas.height / 5 + 40;
-
-	//create alarm text3
-	alarmField3 = new createjs.Text(alarm3, "bold 20px Times", "#0645AD");
-	alarmField3.x = 40;
-	alarmField3.y = canvas.height / 5 + 80;
-
-	//create alarm text4
-	alarmField4 = new createjs.Text(alarm4, "bold 20px Times", "#0645AD");
-	alarmField4.x = 40;
-	alarmField4.y = canvas.height / 5 + 120;
-
-	//create alarm text5
-	alarmField5 = new createjs.Text(alarm5, "bold 20px Times", "#0645AD");
-	alarmField5.x = 40;
-	alarmField5.y = canvas.height / 5 + 160;
-
-	//create alarm text6
-	alarmField6 = new createjs.Text(alarm6, "bold 20px Times", "#0645AD");
-	alarmField6.x = 40;
-	alarmField6.y = canvas.height / 5 + 200;
-
-	//create alarm text7
-	alarmField7 = new createjs.Text(alarm7, "bold 20px Times", "#0645AD");
-	alarmField7.x = 40;
-	alarmField7.y = canvas.height / 5 + 240;
-
-	//create alarm text8
-	alarmField8 = new createjs.Text(alarm8, "bold 20px Times", "#0645AD");
-	alarmField8.x = 40;
-	alarmField8.y = canvas.height / 5 + 280;
-
-	//create alarm text9
-	alarmField9 = new createjs.Text(alarm9, "bold 20px Times", "#0645AD");
-	alarmField9.x = 40;
-	alarmField9.y = canvas.height / 5 + 320;
-
-	//create alarm text10
-	alarmField10 = new createjs.Text(alarm10, "bold 20px Times", "#0645AD");
-	alarmField10.x = 40;
-	alarmField10.y = canvas.height / 5 + 360;
-
-	//ensure stage is blank and add the hand
+	//ensure stage is blank and add the alarms and hand
 	stage.clear();
-	stage.addChild(alarmField1);
-	stage.addChild(alarmField2);
-	stage.addChild(alarmField3);
-	stage.addChild(alarmField4);
-	stage.addChild(alarmField5);
-	stage.addChild(alarmField6);
-	stage.addChild(alarmField7);
-	stage.addChild(alarmField8);
-	stage.addChild(alarmField9);
-	stage.addChild(alarmField10);
+
+	createAlarm(alarm1, 0);
+	createAlarm(alarm2, 40);
+	createAlarm(alarm3, 80);
+	createAlarm(alarm4, 120);
+	createAlarm(alarm5, 160);
+	createAlarm(alarm6, 200);
+	createAlarm(alarm7, 240);
+	createAlarm(alarm8, 280);
+	createAlarm(alarm9, 320);
+	createAlarm(alarm10, 360);
+
 	stage.addChild(hand);
 	stage.update(); 	//update the stage to show text
 
@@ -234,29 +200,38 @@ function restart() {
 
 function tick() {
 
-	//handle movement controls
-	if (lfHeld) {
-		hand.x -= HAND_SPEED;
-	}
-	if (rtHeld) {
-		hand.x += HAND_SPEED;
-	}
-	if (upHeld) {
-		hand.y -= HAND_SPEED;
-	}
-	if (dnHeld) {
-		hand.y += HAND_SPEED;
-	}
+		//handle movement controls
+		if (lfHeld) {
+			hand.x -= HAND_SPEED;
+		}
+		if (rtHeld) {
+			hand.x += HAND_SPEED;
+		}
+		if (upHeld) {
+			hand.y -= HAND_SPEED;
+		}
+		if (dnHeld) {
+			hand.y += HAND_SPEED;
+		}
 
-	hand.x += Math.random() * 15
-	hand.x -= Math.random() * 15
-	hand.y += Math.random() * 20
-	hand.y -= Math.random() * 20
+		hand.x += Math.random() * 20
+		hand.x -= Math.random() * 20
+		hand.y += Math.random() * 25
+		hand.y -= Math.random() * 25
 
-	canvas.onclick = handleClick;
+		// if (clickHeld) {
+		// 	handleClick();
+		// }
+
+		canvas.onclick = handleClick;
+
+		for (var i = 0; i < alarms.length; i++) {
+			if (checkCollision(hand, alarms[i])) {
+				alarms[i].color = "#ff0000";
+			}
+		}
 
 	//check if hand hits wall TK
-
 	stage.update();
 }
 
@@ -314,4 +289,46 @@ function handleKeyUp(e) {
 		case KEYCODE_DOWN:
 			dnHeld = false;
 	}
+}
+
+function createAlarm(alarmNum, yShift) {
+	alarm = new createjs.Text(alarmNum, "bold 20px Times", "#0645AD");
+	alarm.x = 40;
+	alarm.y = canvas.height / 5 + yShift;
+	stage.addChild(alarm);
+	alarms.push(alarm);
+}
+
+function checkCollision(handElement, hitElement) {
+	var leftBorder = hitElement.x;
+	var rightBorder = hitElement.x + hitElement.getBounds().width;
+	var topBorder = hitElement.y;
+	var bottomBorder = hitElement.y + hitElement.getBounds().height;
+
+	var handLeftBorder = handElement.x;
+	var handRightBorder = handElement.x + hand_width;
+	var handTopBorder = handElement.y;
+	var handBottomBorder = handElement.y + hand_height;
+
+	if((handLeftBorder<=rightBorder) && (handRightBorder >= leftBorder) && (handTopBorder <= bottomBorder) && (handBottomBorder >= topBorder)) {
+		return hitElement;
+	}
+	return false;
+}
+
+function destroyAlarm(b) {
+	createjs.Tween.get(b, {}).to({scaleX:0, scaleY:0}, 300);
+}
+
+function endGame() {
+	stage.removeAllChildren();
+	stage.clear();
+	gameStarted = false; 
+
+	mainCanvas.style.backgroundColor = "#000000";
+
+	messageField.text = "It's over!\n\n\nYou chose " + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
+	stage.addChild(messageField);
+
+	watchRestart();
 }
