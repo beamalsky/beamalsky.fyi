@@ -44,7 +44,7 @@ document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
 //introText
-introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\nUse the arrow keys to move.\n\nHit space to start and select."
+introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\nUse the arrow keys to move.\n\nClick to start and select."
 
 //alarmText
 alarm1 = "BMD False Alarm";
@@ -174,7 +174,7 @@ function restart() {
 	hand.scaleY = 0.05;
 	hand.regX = 15;
 	hand.x = canvas.width / 2;
-	hand.y = canvas.height / 2;
+	hand.y = 650;
 
 	//ensure stage is blank and add the alarms and hand
 	stage.clear();
