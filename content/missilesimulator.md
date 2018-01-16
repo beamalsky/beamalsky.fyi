@@ -13,5 +13,5 @@ weight = 1
 ***
 
 <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-<script src="/missilesimulator/missilesimulator.js"></script>
+<script src="/missilesimulator/missilesimulator2.js"></script>
 <canvas id="mainCanvas" width="500" height="700"></canvas>
