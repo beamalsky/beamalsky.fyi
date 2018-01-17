@@ -79,7 +79,7 @@ function init() {
 	canvas = document.getElementById("mainCanvas");
 	stage = new createjs.Stage(canvas);
 
-	createjs.Touch.enable(stage);
+	//createjs.Touch.enable(stage);
 	mainCanvas.style.backgroundColor = "#000000";
 
 	messageField = new createjs.Text("Loading:", "bold 20px Arial", "#FFFFFF");
@@ -89,7 +89,7 @@ function init() {
 	messageField.x = canvas.width / 2;
 	messageField.y = canvas.height / 2 - 250;
 
-	globe = new createjs.Bitmap("globe.gif");
+	globe = new createjs.Bitmap("globe.png");
 	globe.scaleX = 0.4;
 	globe.scaleY = 0.4;
 	globe.x = canvas.width / 2 - 70;
@@ -103,7 +103,7 @@ function init() {
 	var assetsPath = "";
 	manifest = [
 		{id: "bgm", src: "the_buzzcocks_why_cant_i_touch_it.mp3"},
-		{id: "click", src: "click.wav"},
+		{id: "alert", src: "hawaiiAlert.png"},
 
 	];
 
@@ -238,10 +238,11 @@ function tick() {
 			hand.y += HAND_SPEED;
 		}
 
-		hand.x += Math.random() * 20
-		hand.x -= Math.random() * 20
-		hand.y += Math.random() * 25
-		hand.y -= Math.random() * 25
+		//shaky hand!!
+		// hand.x += Math.random() * 20
+		// hand.x -= Math.random() * 20
+		// hand.y += Math.random() * 25
+		// hand.y -= Math.random() * 25
 
 		// if (clickHeld) {
 		// 	handleClick();
@@ -348,27 +349,31 @@ function destroyAlarm(b) {
 
 function endGame1() {
 
+	messageField.y = canvas.height / 2 - 150;
 	messageField.text = "Uh oh!\n\n\nYou chose\n\n" + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
 
 }
 
 function endGame2() {
 
+	messageField.y = canvas.height / 2 - 150;
 	messageField.text = "Nice job!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand ran a successful missile drill.\n\n\nReady for your next shift?\n\nClick to play again!";
 
 }
 
 function endGame3() {
 
+	messageField.y = canvas.height / 2 - 250;
+
 	alert = new createjs.Bitmap("hawaiiAlert.png");
-	alert.scaleX = 0.5;
-	alert.scaleY = 0.5;
-	hand.x = canvas.width / 2;
-	hand.y = 300;
+	alert.scaleX = 0.15;
+	alert.scaleY = 0.15;
+	alert.x = canvas.width / 2 - 200;
+	alert.y = 275;
 
 	stage.addChild(alert);
 
-	messageField.text = "Oh no!!!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand initiated a statewide nuclear panic.\n\n\nThe citizens of Hawaii know a new terror\n\nthey've never before seen.\n\n\n\nPlay again?";
+	messageField.text = "Oh no!!!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand initiated a statewide nuclear panic.\n\n\n\n\n\n\n\n\n\nThe citizens of Hawaii know a new terror\n\nthey've never before seen.\n\n\n\nClick to play again.";
 
 }
 
@@ -413,7 +418,6 @@ function endGame(a) {
 			break;
 	}
 
-	messageField.y = canvas.height / 2 - 150;
 	stage.addChild(messageField);
 
 	watchGameStart();
