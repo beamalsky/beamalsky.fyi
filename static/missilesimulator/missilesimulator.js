@@ -16,6 +16,8 @@ const FPS = 15;
 var hand_width = 10;
 var hand_height = 10;
 
+var mobile = false;
+
 var gameStarted = false;
 var gameFinished = false;
 var selectedAlarm;
@@ -32,6 +34,7 @@ var dnHeld;			//is the user holding a down command
 var canvas;			//Main canvas
 var stage;			//Main display stage
 
+var bgm;
 var hand;			//the clicker
 var globe;			//spinning globe
 
@@ -46,7 +49,8 @@ document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
 //introText
-introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nUse the arrow keys to move and\n\nthe mouse or space bar to select."
+introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nUse the arrow keys to move and\n\nthe mouse or space bar to select.";
+introTextMobile = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nTilt your phone to move and\n\ntap to select.";
 
 //alarmText
 alarm1 = "BMD False Alarm";
@@ -67,12 +71,13 @@ function init() {
 		return;
 	}
 
-	// if (createjs.BrowserDetect.isIOS || createjs.BrowserDetect.isAndroid || createjs.BrowserDetect.isBlackberry) {
-	// 	document.getElementById("mobile").style.display = "block";
-	// 	document.getElementById("content").style.display = "none";
+	if (createjs.BrowserDetect.isIOS || createjs.BrowserDetect.isAndroid || createjs.BrowserDetect.isBlackberry) {
+		document.getElementById("mobile").style.display = "block";
+		document.getElementById("content").style.display = "none";
 
-	// 	return;
-	// }
+		mobile = true;
+		return;
+	}
 
 	canvas = document.getElementById("mainCanvas");
 	stage = new createjs.Stage(canvas);
@@ -128,14 +133,19 @@ function updateLoading() {
 function doneLoading(event) {
 	//clearInterval(loadingInterval);
 
-	messageField.text = introText;
+	if (!mobile) {
+		messageField.text = introText;
+	} else {
+		messageField.text = introTextMobile;
+	}
+
 	stage.addChild(messageField);
 	stage.addChild(globe);
 
 	stage.update(); 	//update the stage to show text
 
 	// start the music
-	createjs.Sound.play("bgm", {interrupt: createjs.Sound.INTERRUPT_NONE, loop: -1, volume: 0.4});
+	bgm = createjs.Sound.play("bgm", {interrupt: createjs.Sound.INTERRUPT_NONE, loop: -1, volume: 0.4});
 
 	createjs.Ticker.setFPS(FPS);
 	createjs.Ticker.addEventListener("tick", tick);
@@ -148,6 +158,7 @@ function restart() {
 	stage.removeAllChildren();
 
 	mainCanvas.style.backgroundColor = "#000000";
+	bgm.paused = false;
 
 	messageField.text = introText;
 	messageField.y = canvas.height / 2 - 250;
@@ -175,11 +186,6 @@ function GameStart() {
 	hand.regX = 15;
 	hand.x = canvas.width / 2;
 	hand.y = 600;
-
-	hand2 = new createjs.Bitmap("hand2.png");
-	hand2.scaleX = 0.05;
-	hand2.scaleY = 0.05;
-	hand2.regX = 15;
 
 	//ensure stage is blank and add the alarms and hand
 	stage.clear();
@@ -441,6 +447,8 @@ function endGame(a) {
 	stage.removeAllChildren();
 	stage.clear();
 	gameFinished = true;
+
+	bgm.paused = true;
 
 	switch(a) {
 		case alarms[0]:
