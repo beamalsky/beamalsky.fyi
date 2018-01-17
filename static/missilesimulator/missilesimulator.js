@@ -251,7 +251,6 @@ function tick() {
 		canvas.onclick = handleClick;
 
 		if (outOfBounds(hand)) {
-			console.log("It's out! (" + hand.x + "," + hand.y + ")");
 			placeInBounds(hand);
 		}
 
