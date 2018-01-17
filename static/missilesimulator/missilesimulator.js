@@ -16,7 +16,8 @@ const FPS = 15;
 var hand_width = 10;
 var hand_height = 10;
 
-var gameStarted = false; 
+var gameStarted = false;
+var gameFinished = false;
 var selectedAlarm;
 
 var manifest;           // used to register sounds for preloading
@@ -45,7 +46,7 @@ document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
 //introText
-introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nUse the arrow keys to move.\n\nClick to start and select."
+introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nUse the arrow keys to move and\n\nthe mouse or space bar to select."
 
 //alarmText
 alarm1 = "BMD False Alarm";
@@ -58,9 +59,6 @@ alarm7 = "DRILL - PACOM (CDW) - STATE ONLY";
 alarm8 = "Landslide - Hanna Road Closure";
 alarm9 = "Amber Alert DEMO TEST";
 alarm10 = "High Surf Warning North Shores";
-
-//endText
-//var endText = "It's over!\n\nYou chose " + selectedAlarm + ".\n\nWow that was not right at all."
 
 function init() {
 	if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -139,50 +137,28 @@ function doneLoading(event) {
 	// start the music
 	createjs.Sound.play("bgm", {interrupt: createjs.Sound.INTERRUPT_NONE, loop: -1, volume: 0.4});
 
-	watchGameStart();
+	createjs.Ticker.setFPS(FPS);
+	createjs.Ticker.addEventListener("tick", tick);
+	
+	//watchGameStart();
 }
 
 function restart() {
 		
 	stage.removeAllChildren();
 
+	mainCanvas.style.backgroundColor = "#000000";
+
 	messageField.text = introText;
+	messageField.y = canvas.height / 2 - 250;
 	stage.addChild(messageField);
 	stage.addChild(globe);
 
+	gameStarted = false;
+	gameFinished = false;
+
 	stage.update();
-	watchGameStart();
-}
-
-function watchGameStart() {
-	//watch for clicks
-	canvas.onclick = handleClick;
-}
-
-function handleClick() {
-	
-	canvas.onclick = null;
-	
-	if (!gameStarted) {
-		//prevent extra clicks and hide text
-		stage.removeChild(messageField);
-
-		// TK sound to indicate the player is now on screen
-		//createjs.Sound.play("click");
-
-		GameStart();
-		gameStarted = true;
-	} else {
-		//createjs.Sound.play("click");
-
-		for (var i = 0; i < alarms.length; i++) {
-			if (checkCollision(hand, alarms[i])) {
-				selectedAlarm = alarms[i];
-				endGame(selectedAlarm);
-			}
-		}
-	}
-
+	//watchGameStart();
 }
 
 //reset all game logic
@@ -200,6 +176,11 @@ function GameStart() {
 	hand.x = canvas.width / 2;
 	hand.y = 600;
 
+	hand2 = new createjs.Bitmap("hand2.png");
+	hand2.scaleX = 0.05;
+	hand2.scaleY = 0.05;
+	hand2.regX = 15;
+
 	//ensure stage is blank and add the alarms and hand
 	stage.clear();
 
@@ -216,13 +197,12 @@ function GameStart() {
 
 	stage.addChild(hand);
 	stage.update(); 	//update the stage to show text
-
-	createjs.Ticker.setFPS(FPS);
-	createjs.Ticker.addEventListener("tick", tick);
-
 }
 
 function tick() {
+
+		canvas.onmousedown = handleMouseDown;
+		canvas.onmouseup = handleMouseUp; 
 
 		//handle movement controls
 		if (lfHeld) {
@@ -239,18 +219,24 @@ function tick() {
 		}
 
 		//shaky hand!!
-		hand.x += Math.random() * 20
-		hand.x -= Math.random() * 20
-		hand.y += Math.random() * 25
-		hand.y -= Math.random() * 25
-
-		// if (clickHeld) {
-		// 	handleClick();
+		// if (hand) {
+		// 	hand.x += Math.random() * 20
+		// 	hand.x -= Math.random() * 20
+		// 	hand.y += Math.random() * 25
+		// 	hand.y -= Math.random() * 25
 		// }
 
-		canvas.onclick = handleClick;
+		if (hand && clickHeld) {
+		 	hand.rotation = -30;
+		 	stage.update();
+		} else if (hand && !clickHeld) {
+			hand.rotation = 0;
+			stage.update();
+		}
 
-		if (outOfBounds(hand)) {
+		//canvas.onmousedown = handleClick;
+
+		if (hand && outOfBounds(hand)) {
 			placeInBounds(hand);
 		}
 
@@ -266,6 +252,37 @@ function tick() {
 	stage.update();
 }
 
+function handleMouseDown() {
+	clickHeld = true;
+
+	if (!gameStarted) {
+		//prevent extra clicks and hide text
+		stage.removeChild(messageField);
+
+		// TK sound to indicate the player is now on screen
+		//createjs.Sound.play("click");
+
+		GameStart();
+		gameStarted = true;
+	} else if (gameFinished) {
+		restart();
+	} else {
+		//createjs.Sound.play("click");
+		clickHeld = true;
+
+		for (var i = 0; i < alarms.length; i++) {
+			if (checkCollision(hand, alarms[i])) {
+				selectedAlarm = alarms[i];
+				endGame(selectedAlarm);
+			}
+		}
+	}
+}
+
+function handleMouseUp() {
+	clickHeld = false;
+}
+
 //allow for WASD and arrow control scheme
 function handleKeyDown(e) {
 	//cross browser issues exist
@@ -275,21 +292,34 @@ function handleKeyDown(e) {
 	switch (e.keyCode) {
 		case KEYCODE_SPACE:
 			clickHeld = true;
+			handleMouseDown();
 			return false;
 		case KEYCODE_A:
 		case KEYCODE_LEFT:
+			if (!gameStarted) {
+				handleMouseDown();
+			}
 			lfHeld = true;
 			return false;
 		case KEYCODE_D:
 		case KEYCODE_RIGHT:
+			if (!gameStarted) {
+				handleMouseDown();
+			}
 			rtHeld = true;
 			return false;
 		case KEYCODE_W:
 		case KEYCODE_UP:
+			if (!gameStarted) {
+				handleMouseDown();
+			}
 			upHeld = true;
 			return false;
 		case KEYCODE_S:
 		case KEYCODE_DOWN:
+			if (!gameStarted) {
+				handleMouseDown();
+			}
 			dnHeld = true;
 			return false;
 	}
@@ -373,41 +403,44 @@ function destroyAlarm(b) {
 
 function endGame1() {
 
-	messageField.y = canvas.height / 2 - 150;
-	messageField.text = "Uh oh!\n\n\nYou chose\n\n" + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
+	mainCanvas.style.backgroundColor = "#000000";
+
+	messageField.y = canvas.height / 2 - 250;
+	messageField.text = "Hm.\n\n\nYou chose\n\n" + selectedAlarm.text + ",\n\nwhich really wasn't right at all.\n\n\nBut who knows what it does! This is the actual\n\ntext interface for Hawaii's emergency alert\n\nsystem: a jumble of contextless and\n\nredundant blue text tasked with notifying a\n\ncountry of impending crisis.\n\n\nBetter luck next time!\n\nClick to play again.";
 
 }
 
 function endGame2() {
 
-	messageField.y = canvas.height / 2 - 150;
-	messageField.text = "Nice job!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand ran a successful missile drill.\n\n\nReady for your next shift?\n\nClick to play again!";
+	mainCanvas.style.backgroundColor = "#008000";
+
+	messageField.y = canvas.height / 2 - 250;
+	messageField.text = "Nice work!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand ran a successful missile drill.\n\n\n In the event of war with North Korea,\n\na war for which the United States is\n\nquietly gearing up, Hawaii will be marginally\n\nmore prepared for the ballistics to strike.\n\n\nReady for your next shift?\n\nClick to play again!";
 
 }
 
 function endGame3() {
 
-	messageField.y = canvas.height / 2 - 250;
+	mainCanvas.style.backgroundColor = "#f92c2c";
+
+	messageField.y = canvas.height / 2 - 300;
 
 	alert = new createjs.Bitmap("hawaiiAlert.png");
 	alert.scaleX = 0.15;
 	alert.scaleY = 0.15;
 	alert.x = canvas.width / 2 - 200;
-	alert.y = 275;
+	alert.y = 215;
 
 	stage.addChild(alert);
 
-	messageField.text = "Oh no!!!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand initiated a statewide nuclear panic.\n\n\n\n\n\n\n\n\n\nThe citizens of Hawaii know a new terror\n\nthey've never before seen.\n\n\n\nClick to play again.";
-
+	messageField.text = "Oh no!!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand initiated a statewide nuclear panic.\n\n\n\n\n\n\n\n\nIt will take 38 minutes for government officials\n\nto respond to this alert, and the citizens of\n\nHawaii will learn a new terror as they run for\n\nshelter and call their loved ones.\n\n\“Someone clicked the wrong thing on the\n\ncomputer,\" your agency's spokesman will say.\n\n\n\nClick to play again.";
 }
 
 function endGame(a) {
 	
 	stage.removeAllChildren();
 	stage.clear();
-	gameStarted = false; 
-
-	mainCanvas.style.backgroundColor = "#000000";
+	gameFinished = true;
 
 	switch(a) {
 		case alarms[0]:
@@ -443,6 +476,4 @@ function endGame(a) {
 	}
 
 	stage.addChild(messageField);
-
-	watchGameStart();
 }
