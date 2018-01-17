@@ -76,7 +76,7 @@ function init() {
 		// document.getElementById("content").style.display = "none";
 
 		mobile = true;
-		return;
+		//return;
 	}
 
 	canvas = document.getElementById("mainCanvas");
