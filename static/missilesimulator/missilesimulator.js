@@ -45,7 +45,7 @@ document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
 //introText
-introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\nUse the arrow keys to move.\n\nClick to start and select."
+introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nUse the arrow keys to move.\n\nClick to start and select."
 
 //alarmText
 alarm1 = "BMD False Alarm";
@@ -86,15 +86,16 @@ function init() {
 	messageField.textAlign = "center";
 	messageField.textBaseline = "middle";
 	messageField.x = canvas.width / 2;
-	messageField.y = canvas.height / 2 - 180;
+	messageField.y = canvas.height / 2 - 250;
 
 	globe = new createjs.Bitmap("globe.gif");
-	globe.scaleX = 0.5;
-	globe.scaleY = 0.5;
-	globe.x = canvas.width / 2;
-	globe.y = 300;
+	globe.scaleX = 0.4;
+	globe.scaleY = 0.4;
+	globe.x = canvas.width / 2 - 70;
+	globe.y = 380;
 
 	stage.addChild(messageField);
+	stage.addChild(globe);
 	stage.update(); 	//update the stage to show text
 
 	// begin loading content
