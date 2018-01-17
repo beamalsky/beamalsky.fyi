@@ -79,6 +79,7 @@ function init() {
 	canvas = document.getElementById("mainCanvas");
 	stage = new createjs.Stage(canvas);
 
+	createjs.Touch.enable(stage);
 	mainCanvas.style.backgroundColor = "#000000";
 
 	messageField = new createjs.Text("Loading:", "bold 20px Arial", "#FFFFFF");
