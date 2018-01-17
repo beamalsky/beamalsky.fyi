@@ -32,6 +32,7 @@ var canvas;			//Main canvas
 var stage;			//Main display stage
 
 var hand;			//the clicker
+var globe;			//spinning globe
 
 var messageField;		//the message display field
 var alarmField;			//the alarm display field
@@ -86,6 +87,13 @@ function init() {
 	messageField.textBaseline = "middle";
 	messageField.x = canvas.width / 2;
 	messageField.y = canvas.height / 2 - 180;
+
+	globe = new createjs.Bitmap("globe.gif");
+	globe.scaleX = 0.5;
+	globe.scaleY = 0.5;
+	globe.x = canvas.width / 2;
+	globe.y = 300;
+
 	stage.addChild(messageField);
 	stage.update(); 	//update the stage to show text
 
@@ -174,7 +182,7 @@ function restart() {
 	hand.scaleY = 0.05;
 	hand.regX = 15;
 	hand.x = canvas.width / 2;
-	hand.y = 650;
+	hand.y = 600;
 
 	//ensure stage is blank and add the alarms and hand
 	stage.clear();
@@ -228,6 +236,8 @@ function tick() {
 		for (var i = 0; i < alarms.length; i++) {
 			if (checkCollision(hand, alarms[i])) {
 				alarms[i].color = "#ff0000";
+			} else {
+				alarms[i].color = "#0645AD";
 			}
 		}
 
