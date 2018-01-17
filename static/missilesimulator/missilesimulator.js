@@ -103,7 +103,7 @@ function init() {
 	var assetsPath = "";
 	manifest = [
 		{id: "bgm", src: "the_buzzcocks_why_cant_i_touch_it.mp3"},
-		{id: "alert", src: "hawaiiAlert.png"},
+		//{id: "alert", src: "hawaiiAlert.png"},
 
 	];
 
@@ -239,10 +239,10 @@ function tick() {
 		}
 
 		//shaky hand!!
-		// hand.x += Math.random() * 20
-		// hand.x -= Math.random() * 20
-		// hand.y += Math.random() * 25
-		// hand.y -= Math.random() * 25
+		hand.x += Math.random() * 20
+		hand.x -= Math.random() * 20
+		hand.y += Math.random() * 25
+		hand.y -= Math.random() * 25
 
 		// if (clickHeld) {
 		// 	handleClick();
