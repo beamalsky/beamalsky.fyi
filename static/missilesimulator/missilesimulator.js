@@ -96,7 +96,7 @@ function init() {
 	globe.y = 380;
 
 	stage.addChild(messageField);
-	stage.addChild(globe);
+	//stage.addChild(globe);
 	stage.update(); 	//update the stage to show text
 
 	// begin loading content
@@ -128,20 +128,34 @@ function updateLoading() {
 }
 
 function doneLoading(event) {
-	clearInterval(loadingInterval);
+	//clearInterval(loadingInterval);
 
 	messageField.text = introText;
+	stage.addChild(messageField);
+	stage.addChild(globe);
+
+	stage.update(); 	//update the stage to show text
 
 	// start the music
 	createjs.Sound.play("bgm", {interrupt: createjs.Sound.INTERRUPT_NONE, loop: -1, volume: 0.4});
 
-	watchRestart();
+	watchGameStart();
 }
 
-function watchRestart() {
-	//watch for clicks
+function restart() {
+		
+	stage.removeAllChildren();
+
+	messageField.text = introText;
 	stage.addChild(messageField);
-	stage.update(); 	//update the stage to show text
+	stage.addChild(globe);
+
+	stage.update();
+	watchGameStart();
+}
+
+function watchGameStart() {
+	//watch for clicks
 	canvas.onclick = handleClick;
 }
 
@@ -156,7 +170,7 @@ function handleClick() {
 		// TK sound to indicate the player is now on screen
 		//createjs.Sound.play("click");
 
-		restart();
+		GameStart();
 		gameStarted = true;
 	} else {
 		//createjs.Sound.play("click");
@@ -164,7 +178,7 @@ function handleClick() {
 		for (var i = 0; i < alarms.length; i++) {
 			if (checkCollision(hand, alarms[i])) {
 				selectedAlarm = alarms[i];
-				endGame();
+				endGame(selectedAlarm);
 			}
 		}
 	}
@@ -172,8 +186,8 @@ function handleClick() {
 }
 
 //reset all game logic
-function restart() {
-	//hide anything on stage and show the score
+function GameStart() {
+	//hide anything on stage
 	stage.removeAllChildren();
 	mainCanvas.style.backgroundColor = "#ffffff";
 
@@ -332,16 +346,75 @@ function destroyAlarm(b) {
 	createjs.Tween.get(b, {}).to({scaleX:0, scaleY:0}, 300);
 }
 
-function endGame() {
+function endGame1() {
+
+	messageField.text = "Uh oh!\n\n\nYou chose\n\n" + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
+
+}
+
+function endGame2() {
+
+	messageField.text = "Nice job!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand ran a successful missile drill.\n\n\nReady for your next shift?\n\nClick to play again!";
+
+}
+
+function endGame3() {
+
+	alert = new createjs.Bitmap("hawaiiAlert.png");
+	alert.scaleX = 0.5;
+	alert.scaleY = 0.5;
+	hand.x = canvas.width / 2;
+	hand.y = 300;
+
+	stage.addChild(alert);
+
+	messageField.text = "Oh no!!!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand initiated a statewide nuclear panic.\n\n\nThe citizens of Hawaii know a new terror\n\nthey've never before seen.\n\n\n\nPlay again?";
+
+}
+
+function endGame(a) {
+	
 	stage.removeAllChildren();
 	stage.clear();
 	gameStarted = false; 
 
 	mainCanvas.style.backgroundColor = "#000000";
 
-	messageField.text = "It's over!\n\n\nYou chose\n\n" + selectedAlarm.text + ",\n\nwhich was really not right at all.\n\n\nThink you can do better for your country?\n\nClick to play again!";
+	switch(a) {
+		case alarms[0]:
+			endGame1();
+			break;
+		case alarms[1]:
+			endGame1();
+			break;
+		case alarms[2]:
+			endGame1();
+			break;
+		case alarms[3]:
+			endGame1();
+			break;
+		case alarms[4]:
+			endGame3();
+			break;
+		case alarms[5]:
+			endGame1();
+			break;
+		case alarms[6]:
+			endGame2();
+			break;
+		case alarms[7]:
+			endGame1();
+			break;
+		case alarms[8]:
+			endGame1();
+			break;
+		case alarms[9]:
+			endGame1();
+			break;
+	}
+
 	messageField.y = canvas.height / 2 - 150;
 	stage.addChild(messageField);
 
-	watchRestart();
+	watchGameStart();
 }
