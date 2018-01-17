@@ -250,6 +250,11 @@ function tick() {
 
 		canvas.onclick = handleClick;
 
+		if (outOfBounds(hand)) {
+			console.log("It's out! (" + hand.x + "," + hand.y + ")");
+			placeInBounds(hand);
+		}
+
 		for (var i = 0; i < alarms.length; i++) {
 			if (checkCollision(hand, alarms[i])) {
 				alarms[i].color = "#ff0000";
@@ -341,6 +346,26 @@ function checkCollision(handElement, hitElement) {
 		return hitElement;
 	}
 	return false;
+}
+
+function outOfBounds(h) {
+	//is it visibly off screen?
+	return h.x < -50 || h.x > canvas.width || h.y < -70 || h.y > canvas.height;
+}
+
+function placeInBounds(h) {
+	//if its visual bounds are entirely off screen place it off screen on the other side
+	if (h.x < -50) {
+		h.x = canvas.width - 10;
+	} else if (h.x > canvas.width) {
+		h.x = -40;
+	}
+
+	if (h.y < -70) {
+		h.y = canvas.height - 10;
+	} else if (h.y > canvas.height) {
+		h.y = -60;
+	}
 }
 
 function destroyAlarm(b) {
