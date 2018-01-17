@@ -431,7 +431,7 @@ function endGame3() {
 	// alert.x = canvas.width / 2 - 200;
 	// alert.y = 215;
 
-	stage.addChild(alert);
+	//stage.addChild(alert);
 
 	messageField.text = "Oh no!!\n\n\nYou chose\n\n" + selectedAlarm.text + "\n\nand initiated a statewide nuclear panic.\n\n\n\nIt will take 38 minutes for government officials\n\nto respond to this alert, and the citizens of\n\nHawaii will learn a new terror as they run for\n\nshelter and call their loved ones.\n\n\“Someone clicked the wrong thing on the\n\ncomputer,\" your agency's spokesman will say.\n\n\n\nClick to play again.";
 }
