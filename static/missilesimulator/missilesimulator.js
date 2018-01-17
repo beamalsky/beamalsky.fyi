@@ -189,7 +189,7 @@ function GameStart() {
 	hand.scaleY = 0.05;
 	hand.regX = 15;
 	hand.x = canvas.width / 2;
-	hand.y = 600;
+	hand.y = 500;
 
 	//ensure stage is blank and add the alarms and hand
 	stage.clear();
