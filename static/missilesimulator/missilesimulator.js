@@ -72,8 +72,8 @@ function init() {
 	}
 
 	if (createjs.BrowserDetect.isIOS || createjs.BrowserDetect.isAndroid || createjs.BrowserDetect.isBlackberry) {
-		document.getElementById("mobile").style.display = "block";
-		document.getElementById("content").style.display = "none";
+		// document.getElementById("mobile").style.display = "block";
+		// document.getElementById("content").style.display = "none";
 
 		mobile = true;
 		return;
