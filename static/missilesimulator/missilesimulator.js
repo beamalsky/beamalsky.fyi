@@ -50,7 +50,7 @@ document.onkeyup = handleKeyUp;
 
 //introText
 introText = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nUse the arrow keys to move and\n\nthe mouse or space bar to select.";
-introTextMobile = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nTilt your phone to move and\n\ntap to select.";
+introTextMobile = "It's Saturday January 13, 2018,\n\nand you're beginning your shift at the\n\nHawaii Emergency Management Agency.\n\n\nIt's a normal day, and time for\n\na routine missile drill.\n\n\nLet's run the test!\n\n\n\n\n\n\n\n\n\nTap to select, and play\nthis on a computer for more control.";
 
 //alarmText
 alarm1 = "BMD False Alarm";
@@ -76,7 +76,6 @@ function init() {
 		// document.getElementById("content").style.display = "none";
 
 		mobile = true;
-		//return;
 	}
 
 	canvas = document.getElementById("mainCanvas");
