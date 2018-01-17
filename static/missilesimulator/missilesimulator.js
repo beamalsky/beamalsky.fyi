@@ -219,12 +219,12 @@ function tick() {
 		}
 
 		//shaky hand!!
-		// if (hand) {
-		// 	hand.x += Math.random() * 20
-		// 	hand.x -= Math.random() * 20
-		// 	hand.y += Math.random() * 25
-		// 	hand.y -= Math.random() * 25
-		// }
+		if (hand) {
+			hand.x += Math.random() * 20
+			hand.x -= Math.random() * 20
+			hand.y += Math.random() * 25
+			hand.y -= Math.random() * 25
+		}
 
 		if (hand && clickHeld) {
 		 	hand.rotation = -30;
