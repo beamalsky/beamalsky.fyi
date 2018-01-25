@@ -1,12 +1,14 @@
 +++
-showonlyimage = false
+showonlyimage = true
 draft = false
-frontpage = false
-image = "img/portfolio/buildcoffee.jpg"
+frontpage = true
+image = "img/portfolio/missilesimulator.png"
 date = "2018-01-16"
 title = "Hawaii Missile Simulator"
-weight = 1
+weight = 3
 +++
+
+A lil game of the moment. Can you run the ballistic alert drill? 
 
 <!--more-->
 
@@ -16,6 +18,6 @@ weight = 1
 <script src="/missilesimulator/missilesimulator.js"></script>
 <canvas id="mainCanvas" width="500" height="700"></canvas>
 
-**A lil game by Bea Malsky**
-
 *🎶 : The Buzzcocks - "Why Can't I Touch It"*
+
+Made with CreateJS! Script [here](https://github.com/beamalsky/beamalsky.fyi/blob/master/static/missilesimulator/missilesimulator.js). 
