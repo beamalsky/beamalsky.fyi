@@ -559,10 +559,9 @@ body {
 <!-- SCRIPTS -->
 <script>
 function startExportedGame() {
+	var audio = new Audio("birthday.mp3");
 	attachCanvas( document.getElementById("game") );
 	load_game( document.getElementById("exportedGameData").text.slice(1) );
-	// var audio = new Audio("birthday.mp3");
-	// audio.play();
 }
 </script>
 
@@ -5688,10 +5687,8 @@ var bgm = false;
 
 function onkeydown(e) {
 	if (!bgm) {
-		var audio = new Audio("birthday.mp3");
 		audio.play();
 		bgm = true;
-		console.log("play audio here");
 	}
 
 	if(e.keyCode == key.left || e.keyCode == key.right || e.keyCode == key.up || e.keyCode == key.down || !isPlayerEmbeddedInEditor)
@@ -5841,10 +5838,8 @@ var touchInfo = {
 
 function ontouchstart(e) {
 	if (!bgm) {
-		var audio = new Audio("birthday.mp3");
 		audio.play();
 		bgm = true;
-		console.log("play audio here");
 	}
 
 	e.preventDefault();
