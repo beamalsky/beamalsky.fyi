@@ -561,10 +561,8 @@ body {
 function startExportedGame() {
 	attachCanvas( document.getElementById("game") );
 	load_game( document.getElementById("exportedGameData").text.slice(1) );
-	if (confirm("Play music?")) {
-		var audio = new Audio("birthday.mp3");
-		audio.play();
-	};
+	// var audio = new Audio("birthday.mp3");
+	// audio.play();
 }
 </script>
 
@@ -5166,6 +5164,7 @@ function reset_cur_game() {
 }
 
 var update_interval = null;
+
 function onready(startWithTitle) {
 	if(startWithTitle === undefined || startWithTitle === null) startWithTitle = true;
 
@@ -5685,8 +5684,16 @@ var curPlayerDirection = Direction.None;
 var playerHoldToMoveTimer = 0;
 
 var keyDownList = [];
+var bgm = false; 
 
 function onkeydown(e) {
+	if (!bgm) {
+		var audio = new Audio("birthday.mp3");
+		audio.play();
+		bgm = true;
+		console.log("play audio here");
+	}
+
 	if(e.keyCode == key.left || e.keyCode == key.right || e.keyCode == key.up || e.keyCode == key.down || !isPlayerEmbeddedInEditor)
 		e.preventDefault();
 
