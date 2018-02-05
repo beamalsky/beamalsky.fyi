@@ -15,7 +15,7 @@ You're invited!
 
 PAL 0
 0,0,0
-33,156,118
+28,133,100
 255,214,163
 
 ROOM 0
@@ -28,8 +28,8 @@ a,k,0,0,d,0,0,0,0,0,0,0,0,e,c,a
 a,k,0,0,d,0,0,0,0,0,0,0,0,g,f,a
 a,k,0,0,d,0,0,h,0,0,h,0,0,h,d,a
 a,k,0,0,d,0,0,0,0,0,0,0,0,e,c,a
-a,k,0,0,d,0,0,0,0,0,0,0,0,g,f,a
-a,k,e,e,c,0,0,h,0,0,h,0,0,h,d,a
+a,k,0,0,d,0,0,h,0,0,h,0,0,g,f,a
+a,k,e,e,c,0,0,0,0,0,0,0,0,h,d,a
 a,i,0,0,0,0,0,0,0,0,0,0,0,e,c,a
 a,i,0,0,0,i,0,0,0,0,0,0,0,0,0,a
 a,i,0,0,0,i,0,0,0,0,a,a,0,0,0,a
@@ -49,7 +49,7 @@ ITM 1 5,2
 ITM 5 5,4
 ITM 5 3,1
 ITM 6 2,8
-ITM 1 1,1
+ITM 3 1,1
 EXT 5,0 1 5,15
 EXT 6,0 1 6,15
 EXT 7,0 1 7,15
@@ -238,11 +238,11 @@ TIL m
 00000000
 
 SPR A
-01000000
+01000001
 10100100
 01001110
 00011011
-00001110
+10001110
 00100100
 01010000
 00100000
@@ -280,7 +280,7 @@ POS 0 13,12
 
 SPR c
 00000010
-00111100
+00111110
 00100100
 01001010
 00100100
@@ -288,7 +288,7 @@ SPR c
 00000000
 00000000
 DLG SPR_2
-POS 0 5,9
+POS 0 10,10
 
 SPR d
 00000010
@@ -361,6 +361,30 @@ SPR i
 00000000
 DLG SPR_7
 POS 1 4,5
+
+SPR j
+00000000
+10000000
+10000000
+10000000
+10000000
+10000000
+10000000
+00000000
+DLG SPR_8
+POS 1 1,10
+
+SPR k
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00111100
+00100100
+DLG SPR_9
+POS 0 10,12
 
 ITM 0
 00000000
@@ -450,10 +474,10 @@ DLG ITM_0
 You play a fast-paced game of Pinball: SVU
 
 DLG SPR_1
-ID please! Thanks. Welcome to Bea's 24th birthday.
+ID please! Thanks. Welcome to Bea's Birthday eCard.
 
 DLG SPR_2
-What? A birthday drink! 
+What? A birthday drink! Featuring euchre, dominoes, tots, and friendship!
 
 DLG SPR_3
 When? February 19, 7pm onward
@@ -483,13 +507,26 @@ DLG ITM_5
 You acquire: A Basket of Tots
 
 DLG SPR_0
-Hey!! You're not allowed back here.
+"""
+{
+  - {item "Stolen bottle"} == 1 ?
+    Stop sneaking around and get outta here.
+  - else ?
+    Hey!! You're not allowed back here.
+}
+"""
 
 DLG SPR_7
 Hm, are you lost? The specials board is back behind you.
 
 DLG ITM_6
 You covertly grab a bottle from behind the bar.
+
+DLG SPR_8
+Men's restroom permanently out of service. Sorry.
+
+DLG SPR_9
+Reminder: Skylark is cash only!
 
 VAR a
 42
