@@ -5840,6 +5840,13 @@ var touchInfo = {
 };
 
 function ontouchstart(e) {
+	if (!bgm) {
+		var audio = new Audio("birthday.mp3");
+		audio.play();
+		bgm = true;
+		console.log("play audio here");
+	}
+
 	e.preventDefault();
 
 	if( e.changedTouches.length > 0 ) {
