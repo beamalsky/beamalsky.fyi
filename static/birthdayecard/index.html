@@ -558,8 +558,9 @@ body {
 
 <!-- SCRIPTS -->
 <script>
+var audio = new Audio("birthday.mp3");
+
 function startExportedGame() {
-	var audio = new Audio("birthday.mp3");
 	attachCanvas( document.getElementById("game") );
 	load_game( document.getElementById("exportedGameData").text.slice(1) );
 }
