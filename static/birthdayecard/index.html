@@ -561,6 +561,10 @@ body {
 function startExportedGame() {
 	attachCanvas( document.getElementById("game") );
 	load_game( document.getElementById("exportedGameData").text.slice(1) );
+	if (confirm("Play music?")) {
+		var audio = new Audio("birthday.mp3");
+		audio.play();
+	};
 }
 </script>
 
@@ -7082,7 +7086,7 @@ var scriptUtils = scriptModule.CreateUtils(); // TODO: move to editor.js?
 <body onload='startExportedGame()'>
 	<!-- GAME CANVAS -->
 	<canvas id='game'></canvas>
-	<audio src="birthday.mp3" autoplay loop display="none">
+	<!-- <audio src="birthday.mp3" autoplay loop display="none"> -->
 </body>
 
 
