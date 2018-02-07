@@ -12,7 +12,7 @@ googleAnalytics = "UA-113596479-1"
   # Use custom.css for your custom styling
   style = "pink"
   description = "beamalsky.fyi"
-  copyright = "&copy;2017 Bea Malsky"
+  copyright = ""
   sidebarAbout = [
     "Civic journalism, new media, procedural rhetoric",
     "📍 the South Side of Chicago", 
