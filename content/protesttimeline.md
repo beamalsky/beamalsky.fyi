@@ -8,7 +8,7 @@ title = "Chicago Protest Timelines"
 weight = 2
 +++
 
-A series of reported interactives documenting protest and police violence in Chicago, summer 2020
+A series of web interactives for first-person documentation of protests and police violence in Chicago, summer 2020
 
 <!--more-->
 
