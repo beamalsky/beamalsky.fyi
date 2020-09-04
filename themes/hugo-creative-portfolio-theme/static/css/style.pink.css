@@ -325,6 +325,12 @@ SIDEBAR + RIGHT COLUMN
 #sidebar {
   padding-top: 40px;
 }
+.sidebar-p a {
+  font-weight: 700;
+}
+.tagline {
+  color: black !important;
+}
 /*modified sidebar to follow scroll */
 .sidebar-content {
     position: fixed;
@@ -357,10 +363,7 @@ SIDEBAR + RIGHT COLUMN
 }
 .sidebar-p {
   color: #999999;
-  font-size: 14px;
-}
-.sidebar-p a {
-  font-weight: 900;
+  font-size: 13.5px;
 }
 .sidebar-menu {
   list-style-type: none;
