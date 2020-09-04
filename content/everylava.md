@@ -5,7 +5,7 @@ frontpage = true
 image = "img/portfolio/everylava.jpg"
 date = "2017-10-11"
 title = "@everylava"
-weight = 5
+weight = 4
 +++
 
 A groovy Twitter bot

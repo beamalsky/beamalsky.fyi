@@ -5,7 +5,7 @@ frontpage = true
 image = "img/portfolio/englewoodclinic.jpg"
 date = "2018-01-25"
 title = "City-Run Englewood Clinic Abruptly Shuttered"
-weight = 4
+weight = 5
 +++
 
 Federal funding gets cut, yet HIV rates remain high in vulnerable communities. An investigation for the *South Side Weekly*

@@ -2149,7 +2149,7 @@ a.list-group-item.active > .badge,
   margin-left: 3px;
 }
 
-/* Custom CSS -Bea*/
+/* Custom CSS */
 
 img[src$=".svg"] {
   width:100%;
@@ -2157,7 +2157,8 @@ img[src$=".svg"] {
 }
 
 img {
-  max-width: 100%;
+  max-width: 80%;
+  margin: 1rem auto;
 }
 
 canvas {

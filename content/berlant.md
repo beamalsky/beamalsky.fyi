@@ -5,7 +5,7 @@ frontpage = true
 image = "img/portfolio/berlant.jpg"
 date = "2017-10-11"
 title = "Pleasure Won: A Conversation with Lauren Berlant"
-weight = 4
+weight = 3
 tags = ["writing"]
 +++
 
