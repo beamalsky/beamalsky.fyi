@@ -15,22 +15,10 @@ googleAnalytics = "UA-113596479-1"
   copyright = ""
   sidebarAbout = [
     "Civic journalism, new media, procedural rhetoric",
-    "📍 the South Side of Chicago", 
+    "📍 the South Side of Chicago",
     "<b>Currently</b><br>🌺 &nbsp; Events + books at Build Coffee<br>🌺 &nbsp; Games + reproductive justice at Game Changer Chicago",
     "<b>Alum</b><br>🌻 &nbsp; South Side Weekly<br>🌻 &nbsp; UChicago"
   ]
-  # Contact page
-     # Since this template is static, the contact form uses www.formspree.io as a
-     # proxy. The form makes a POST request to their servers to send the actual
-     # email. Visitors can send up to a 1000 emails each month for free.
-     #
-     # What you need to do for the setup?
-     #
-     # - set your email address under 'email' below
-     # - upload the generated site to your server
-     # - send a dummy email yourself to confirm your account
-     # - click the confirm link in the email from www.formspree.io
-     # - you're done. Happy mailing!
   email = "beamalsky@gmail.com"
 
   # Nav links in the side bar
