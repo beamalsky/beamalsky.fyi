@@ -325,6 +325,12 @@ SIDEBAR + RIGHT COLUMN
 #sidebar {
   padding-top: 40px;
 }
+.sidebar-p a {
+  font-weight: 700;
+}
+.tagline {
+  color: black !important;
+}
 /*modified sidebar to follow scroll */
 .sidebar-content {
     position: fixed;
@@ -357,7 +363,7 @@ SIDEBAR + RIGHT COLUMN
 }
 .sidebar-p {
   color: #999999;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 .sidebar-menu {
   list-style-type: none;
@@ -2143,7 +2149,7 @@ a.list-group-item.active > .badge,
   margin-left: 3px;
 }
 
-/* Custom CSS -Bea*/
+/* Custom CSS */
 
 img[src$=".svg"] {
   width:100%;
@@ -2151,7 +2157,8 @@ img[src$=".svg"] {
 }
 
 img {
-  max-width: 100%;
+  max-width: 80%;
+  margin: 1rem auto;
 }
 
 canvas {

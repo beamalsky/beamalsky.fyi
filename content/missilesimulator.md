@@ -1,14 +1,14 @@
 +++
 showonlyimage = true
 draft = false
-frontpage = true
+frontpage = false
 image = "img/portfolio/missilesimulator.png"
 date = "2018-01-16"
 title = "Hawaii Missile Simulator"
-weight = 3
+weight = 6
 +++
 
-A lil game of the moment. Can you run the ballistic alert drill? 
+A lil game of the moment. Can you run the ballistic alert drill?
 
 <!--more-->
 
@@ -20,4 +20,4 @@ A lil game of the moment. Can you run the ballistic alert drill?
 
 *🎶 : The Buzzcocks - "Why Can't I Touch It"*
 
-Made with CreateJS! Script [here](https://github.com/beamalsky/beamalsky.fyi/blob/master/static/missilesimulator/missilesimulator.js). 
+Made with CreateJS! Script [here](https://github.com/beamalsky/beamalsky.fyi/blob/master/static/missilesimulator/missilesimulator.js).
