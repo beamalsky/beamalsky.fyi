@@ -1,7 +1,7 @@
 +++
 showonlyimage = true
 draft = false
-frontpage = true
+frontpage = false
 image = "img/portfolio/missilesimulator.png"
 date = "2018-01-16"
 title = "Hawaii Missile Simulator"

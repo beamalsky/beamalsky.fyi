@@ -14,4 +14,15 @@ A series of web interactives for first-person documentation of protests and poli
 
 ***
 
-http://protesttimeline.southsideweekly.com/ More TK
+This three-part series features a custom Gatsby app based on Mapbox's storytelling template. It features an Airtable backend, animated Mapbox layers. For Cicero Independiente, it is fully bilingual.
+
+For South Side Weekly:
+- [What Happened May 30?](http://protesttimeline.southsideweekly.com/)
+- [What Happened June 17?](http://protesttimeline.southsideweekly.com/july-17)
+
+For Cicero Independiente:
+- [June 1 and Beyond: Confronting Racism in Cicero](https://confrontingracism.ciceroindependiente.com/)
+
+![What Happened May 30?](/img/portfolio/protesttimeline_wide.png)
+![What Happened June 17?](/img/portfolio/protesttimeline3.png)
+![June 1 and Beyond: Confronting Racism in Cicero](/img/portfolio/protesttimeline2.png)
