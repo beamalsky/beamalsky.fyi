@@ -14,7 +14,7 @@ A series of web interactives for first-person documentation of protests and poli
 
 ***
 
-This three-part series features a custom Gatsby app based on Mapbox's storytelling template. It features an Airtable backend, animated Mapbox layers. For Cicero Independiente, it is fully bilingual.
+This three-part series features a custom Gatsby app based on Mapbox's storytelling template. It features an Airtable backend, smooth scrolling with scrollama, and animated Mapbox layers. For Cicero Independiente it is fully bilingual.
 
 For South Side Weekly:
 - [What Happened May 30?](http://protesttimeline.southsideweekly.com/)
